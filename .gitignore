@@ -1,0 +1,22 @@
+# Environment variables (keep secrets safe)
+.env
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# SQLite database file
+*.db
+
+# Streamlit cache
+.streamlit/
+
+# IDE files
+.vscode/
+.idea/
