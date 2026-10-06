@@ -1,3 +1,18 @@
+## Public portfolio demo
+
+The public deployment uses Groq (`openai/gpt-oss-20b`) and automatically initializes synthetic e-commerce data.
+Python 3.12; Streamlit Community Cloud entrypoint: `app.py`. Configure root secrets `AI_PROVIDER="groq"`,
+`GROQ_API_KEY`, `GROQ_MODEL="openai/gpt-oss-20b"`, and `DEMO_MODE="true"` in the hosting dashboard.
+Never commit `.env` or `.streamlit/secrets.toml`. Use your personal GitHub and Groq accounts only.
+
+Queries run through read-only SQLite connections and an authorizer, with 200-row, two-second and VM-operation limits.
+Each session has a five-question/minute allowance and bounded history. Clear chat does not reset the allowance.
+Questions and synthetic results are sent to the AI provider. Quota and configuration failures display safe messages.
+Free hosting can sleep. Verify the public URL while signed out before linking it from your portfolio.
+
+Run tests with `pip install pytest==8.4.1` and `python -m pytest -q`.
+For local Azure use, set `AI_PROVIDER=azure` and the Azure variables documented below. The demo supports SQLite only.
+The old manual reseeding UI is replaced by automatic startup initialization.
 # SQL Chatbot with Azure OpenAI
 
 A conversational SQL assistant that accepts natural language questions and returns SQL queries, results, and a human-readable explanation — all powered by Azure OpenAI.

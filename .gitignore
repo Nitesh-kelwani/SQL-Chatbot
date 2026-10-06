@@ -15,8 +15,13 @@ env/
 *.db
 
 # Streamlit cache
-.streamlit/
+.streamlit/secrets.toml
 
 # IDE files
 .vscode/
 .idea/
+
+.streamlit/secrets.toml
+*.db
+.venv/
+.pytest_cache/
