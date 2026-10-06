@@ -34,10 +34,11 @@ PRODUCTS = [
 ORDER_STATUSES = ["Completed", "Completed", "Completed", "Pending", "Shipped", "Cancelled"]
 
 
-def seed_database():
+def seed_database(path=DB_PATH):
     """Drop existing tables and repopulate with fresh demo data."""
-    conn = sqlite3.connect(DB_PATH)
+    conn = sqlite3.connect(path)
     cursor = conn.cursor()
+    rng = random.Random(42)
 
     # --- Drop old tables if they exist ---
     cursor.executescript("""
@@ -89,11 +90,11 @@ def seed_database():
     # --- Insert customers (50 customers) ---
     customers = []
     for i in range(1, 51):
-        name    = f"{random.choice(FIRST_NAMES)} {random.choice(LAST_NAMES)}"
+        name    = f"{rng.choice(FIRST_NAMES)} {rng.choice(LAST_NAMES)}"
         email   = f"user{i}@example.com"
-        city    = random.choice(CITIES)
-        country = random.choice(COUNTRIES)
-        created = (datetime(2023, 1, 1) + timedelta(days=random.randint(0, 365))).strftime("%Y-%m-%d")
+        city    = rng.choice(CITIES)
+        country = rng.choice(COUNTRIES)
+        created = (datetime(2023, 1, 1) + timedelta(days=rng.randint(0, 365))).strftime("%Y-%m-%d")
         customers.append((name, email, city, country, created))
 
     cursor.executemany(
@@ -110,18 +111,18 @@ def seed_database():
     # --- Insert orders and order_items (200 orders) ---
     base_date = datetime(2024, 1, 1)
     for _ in range(200):
-        customer_id  = random.randint(1, 50)
-        order_date   = (base_date + timedelta(days=random.randint(0, 365))).strftime("%Y-%m-%d")
-        status       = random.choice(ORDER_STATUSES)
+        customer_id  = rng.randint(1, 50)
+        order_date   = (base_date + timedelta(days=rng.randint(0, 365))).strftime("%Y-%m-%d")
+        status       = rng.choice(ORDER_STATUSES)
 
         # Pick 1–4 random products for each order
-        num_items   = random.randint(1, 4)
-        chosen      = random.sample(range(1, len(PRODUCTS) + 1), num_items)
+        num_items   = rng.randint(1, 4)
+        chosen      = rng.sample(range(1, len(PRODUCTS) + 1), num_items)
         total       = 0.0
         items       = []
 
         for pid in chosen:
-            qty        = random.randint(1, 5)
+            qty        = rng.randint(1, 5)
             unit_price = PRODUCTS[pid - 1][2]   # price from PRODUCTS list
             total     += qty * unit_price
             items.append((pid, qty, unit_price))

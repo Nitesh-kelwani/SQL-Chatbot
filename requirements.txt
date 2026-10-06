@@ -1,5 +1,5 @@
-openai>=1.0.0
-streamlit>=1.32.0
-python-dotenv>=1.0.0
-pandas>=2.0.0
-sqlalchemy>=2.0.0
+openai==1.99.9
+streamlit==1.48.0
+python-dotenv==1.1.1
+pandas==2.2.3
+sqlalchemy==2.0.43

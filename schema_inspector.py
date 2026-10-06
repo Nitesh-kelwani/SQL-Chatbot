@@ -35,7 +35,6 @@ def get_schema_text() -> str:
             schema_lines.append(f"  - {col_name} ({col_type}{nullable})")
 
         schema_lines.append("")  # blank line between tables
-
     return "\n".join(schema_lines)
 
 

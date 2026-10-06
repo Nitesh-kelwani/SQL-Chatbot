@@ -1,0 +1,9 @@
+[theme]
+base = "dark"
+primaryColor = "#93d9b4"
+
+[client]
+showErrorDetails = false
+
+[browser]
+gatherUsageStats = false
